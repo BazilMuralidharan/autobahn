@@ -14,6 +14,10 @@ const CrudReducer = createSlice({
     name:'crudSlice',
     initialState,
     reducers:{
+        getOneUserDatailsFromMetaData:(state, action)=>{
+           const x = state.metaData.find((el)=>el.id === action.payload)
+           console.log(x)
+        }
         
     },
     extraReducers(buillder){
@@ -71,6 +75,8 @@ const CrudReducer = createSlice({
     }
   
 })
+
+export const {getOneUserDatailsFromMetaData} = CrudReducer.actions;
 
 export default CrudReducer.reducer; 
 

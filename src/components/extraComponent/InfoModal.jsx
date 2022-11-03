@@ -30,7 +30,15 @@ const style = {
 
 export default function InfoModalPopUp({handleOpen, open, handleClose, infoDetails}) {
 
-    const {name,phone, address:{city, street, suite, zipcode}} = infoDetails
+
+
+    const nameofUser = infoDetails?.name ?? 'NOT FOUND';
+    const phoneofUser = infoDetails?.phone ?? 'NOT FOUND';
+    const cityofUser = infoDetails?.address?.city ?? 'NOT FOUND';
+    const streetofUser = infoDetails?.address?.street ?? 'NOT FOUND';
+    const suiteofUser = infoDetails?.address?.suite ?? 'NOT FOUND';
+    const zipcodeofUser = infoDetails?.address?.zipcode ?? 'NOT FOUND';
+
    
   return (
     <div>
@@ -50,30 +58,28 @@ export default function InfoModalPopUp({handleOpen, open, handleClose, infoDetai
             <ProfileContainer>
                 <Avatar sx={{bgcolor:"grey" }}></Avatar>
                 <Paper sx={{padding:"20px"}}>
-
                     <Typography id="transition-modal-title" variant="h6" component="h2">
-                        {name??`Not Found`}
+                        {nameofUser}
                     </Typography>
-              
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                        city:  {  city ?? `Not Found`}
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                        street:  {street ?? `Not Found`}
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                        suite:  { suite ?? `Not Found`}
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                        zipcode:  {zipcode ?? `Not Found`}
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                        phone:  {phone ?? `Not Found`}
-                    </Typography>
+                     <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                         {phoneofUser}
+                     </Typography>
+                     <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                         {cityofUser}
+                     </Typography>
+                     <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                         {streetofUser}
+                     </Typography>
+                     <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                         {suiteofUser}
+                     </Typography>
+                     <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                        {zipcodeofUser}
+                     </Typography>
                 </Paper>
             </ProfileContainer>
           </Box>
-        </Fade>
+        </Fade> 
       </Modal>
     </div>
   );

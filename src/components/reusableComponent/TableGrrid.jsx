@@ -17,6 +17,7 @@ import AlertDialog from "../extraComponent/AlertBox";
 import { useState } from "react";
 import { deleteUser } from "../../redux/crudReducer/CrudAsyncActions";
 import InfoModalPopUp from "../extraComponent/InfoModal";
+import {useNavigate} from 'react-router-dom'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -39,6 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function TableGrid() {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const {
         crud: { metaData, loading },
@@ -50,12 +52,10 @@ export default function TableGrid() {
  
     const [openInfoModal, setOpenInfoModal] = useState(false);
     const [infoDetailsUser, setInfoDetailsUser] = useState()
-    const handleOpenInfo = () => setOpenInfoModal(true);
     const handleCloseInfo = () => setOpenInfoModal(false);
 
     const handleInfo=(userDetail)=>{
         setOpenInfoModal(true)
-        // console.log(userDetail);
         setInfoDetailsUser(userDetail)
     }
 
@@ -72,6 +72,9 @@ export default function TableGrid() {
     const deleteConfirmed=()=>{
         dispatch(deleteUser(deleteId))
         setOpenDeleteDialog(false)
+    }
+    const editItem=(userInfo) =>{
+        navigate(`/update/${userInfo.id}`)
     }
     return (
         <TableContainer component={Paper}>
@@ -102,7 +105,7 @@ export default function TableGrid() {
                                 <IconButton onClick={() => deleteItem(row.id, row.name)}>
                                     <Delete />
                                 </IconButton>
-                                <IconButton>
+                                <IconButton onClick={()=>editItem(row)} >
                                     <Edit />
                                 </IconButton>
                                 <IconButton onClick={()=>handleInfo(row)}>
@@ -120,7 +123,6 @@ export default function TableGrid() {
                         deleteConfirmed = {deleteConfirmed}
                     />
                     <InfoModalPopUp
-                        handleOpen={handleOpenInfo}
                         open={openInfoModal} 
                         handleClose={handleCloseInfo}
                         infoDetails= {infoDetailsUser}
