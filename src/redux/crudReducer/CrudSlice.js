@@ -16,7 +16,7 @@ const CrudReducer = createSlice({
     reducers:{
         getOneUserDatailsFromMetaData:(state, action)=>{
            const x = state.metaData.find((el)=>el.id === action.payload)
-           console.log(x)
+           return x; 
         }
         
     },

@@ -12,6 +12,7 @@ export default function Layout(){
         // <BrowserRouter>
             <Container>
                 <Routes>
+                    <Route exact path="/" element={<TableGrid/>}/>
                     <Route exact path="/dashboard" element={<TableGrid/>}/>
                     <Route path="/update/:id" element={<FormCard/>}/>
                     <Route path="*" element={<h1>NOT FOUND</h1>}/>
